@@ -33,15 +33,15 @@ function tampilkanBuku() {
           <div class="border-custom border-info bg-second mb-3">
             <div class="d-flex justify-content-between">
               <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary p-10px" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
+              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
             </div>
             <p class="penulis">Penulis: ${buku.penulis}</p>
             <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-success p-10px" onclick="pindahBuku(${buku.id}, false)">
+            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
+              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, false)">
                 Belum Selesai Dibaca
               </button>
-              <button class="btn btn-danger p-10px" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
+              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
             </div>
           </div>
         `;
@@ -53,15 +53,15 @@ function tampilkanBuku() {
           <div class="border-custom border-info bg-second mb-3">
             <div class="d-flex justify-content-between">
               <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary p-10px" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
+              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
             </div>
             <p class="penulis">Penulis: ${buku.penulis}</p>
             <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-success p-10px" onclick="pindahBuku(${buku.id}, true)">
+            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
+              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, true)">
                 Selesai Dibaca
               </button>
-              <button class="btn btn-danger p-10px" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
+              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
             </div>
           </div>
         `;
@@ -87,6 +87,7 @@ function tambahBuku(event) {
   let inputJudul = elemenForm.querySelector("#judul").value;
   let inputPenulis = elemenForm.querySelector("#penulis").value;
   let inputTahun = elemenForm.querySelector("#tahun").value;
+  inputTahun = Number(inputTahun); // mengubah tahun menjadi integer
   let inputDibaca = elemenForm.querySelector("#dibaca").checked;
 
   // Mendapatkan data buku dari localStorage (jika ada)
@@ -264,15 +265,15 @@ function cariBuku(event) {
           <div class="border-custom border-info bg-second mb-3">
             <div class="d-flex justify-content-between">
               <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary p-10px" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
+              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
             </div>
             <p class="penulis">Penulis: ${buku.penulis}</p>
             <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-success p-10px" onclick="pindahBuku(${buku.id}, false)">
+            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
+              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, false)">
                 Belum Selesai Dibaca
               </button>
-              <button class="btn btn-danger p-10px" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
+              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
             </div>
           </div>
         `;
@@ -284,15 +285,15 @@ function cariBuku(event) {
           <div class="border-custom border-info bg-second mb-3">
             <div class="d-flex justify-content-between">
               <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary p-10px" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
+              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
             </div>
             <p class="penulis">Penulis: ${buku.penulis}</p>
             <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-success p-10px" onclick="pindahBuku(${buku.id}, true)">
+            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
+              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, true)">
                 Selesai Dibaca
               </button>
-              <button class="btn btn-danger p-10px" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
+              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
             </div>
           </div>
         `;
@@ -377,6 +378,7 @@ function editBuku(event) {
     let inputJudul = elemenForm.querySelector("#judulModal").value;
     let inputPenulis = elemenForm.querySelector("#penulisModal").value;
     let inputTahun = elemenForm.querySelector("#tahunModal").value;
+    inputTahun = Number(inputTahun); // mengubah tahun menjadi integer
     let inputDibaca = elemenForm.querySelector("#dibacaModal").checked;
 
     // Ubah data buku pada indeks yang ditentukan
