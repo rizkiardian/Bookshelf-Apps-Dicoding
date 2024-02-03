@@ -123,54 +123,102 @@ function tambahBuku(event) {
   elemenForm.querySelector("#penulis").value = "";
   elemenForm.querySelector("#tahun").value = "";
   elemenForm.querySelector("#dibaca").checked = false;
+
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Buku berhasil ditambahkan",
+    showConfirmButton: false,
+    timer: 1500,
+  });
 }
 
 // Hapus Data Buku
 function hapusBuku(idBuku) {
-  // ambil data buku dari local storage
-  let dataBuku = JSON.parse(localStorage.getItem("buku"));
+  Swal.fire({
+    title: "Konfirmasi Hapus",
+    text: "Apakah Anda yakin  menghapus buku ini?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33ingin",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Ya, hapus!",
+    cancelButtonText: "Batal",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // ambil data buku dari local storage
+      let dataBuku = JSON.parse(localStorage.getItem("buku"));
 
-  // Temukan indeks buku yang akan dihapus dalam array dataBuku
-  let indexBukuHapus = dataBuku.findIndex((buku) => buku.id === idBuku);
+      // Temukan indeks buku yang akan dihapus dalam array dataBuku
+      let indexBukuHapus = dataBuku.findIndex((buku) => buku.id === idBuku);
 
-  // Periksa apakah buku ditemukan
-  if (indexBukuHapus !== -1) {
-    // Hapus buku dari array dataBuku
-    dataBuku.splice(indexBukuHapus, 1);
+      // Periksa apakah buku ditemukan
+      if (indexBukuHapus !== -1) {
+        // Hapus buku dari array dataBuku
+        dataBuku.splice(indexBukuHapus, 1);
 
-    // Simpan kembali array dataBuku yang telah diperbarui ke localStorage
-    localStorage.setItem("buku", JSON.stringify(dataBuku));
+        // Simpan kembali array dataBuku yang telah diperbarui ke localStorage
+        localStorage.setItem("buku", JSON.stringify(dataBuku));
 
-    // Perbarui tampilan data pada Rak Buku
-    tampilkanBuku();
-    // console.log("Buku telah dihapus dari localStorage");
-  } else {
-    console.log("Buku tidak ditemukan dalam localStorage");
-  }
+        // Perbarui tampilan data pada Rak Buku
+        tampilkanBuku();
+        // console.log("Buku telah dihapus dari localStorage");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Buku berhasil dihapus",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        console.log("Buku tidak ditemukan dalam localStorage");
+      }
+    }
+  });
 }
 
 // pindah Data Buku
 function pindahBuku(idBuku, dibaca) {
-  // ambil data buku dari local storage
-  let dataBuku = JSON.parse(localStorage.getItem("buku"));
+  Swal.fire({
+    title: "Konfirmasi Pindah",
+    text: "Apakah Anda yakin memindahkan buku ini?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33ingin",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Ya, pindah!",
+    cancelButtonText: "Batal",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // ambil data buku dari local storage
+      let dataBuku = JSON.parse(localStorage.getItem("buku"));
 
-  // Temukan indeks buku yang akan diubah dalam array dataBuku
-  let indexBukuUbah = dataBuku.findIndex((buku) => buku.id === idBuku);
+      // Temukan indeks buku yang akan diubah dalam array dataBuku
+      let indexBukuUbah = dataBuku.findIndex((buku) => buku.id === idBuku);
 
-  // Periksa apakah buku ditemukan
-  if (indexBukuUbah !== -1) {
-    // Ubah isComplete buku pada indeks yang ditentukan
-    dataBuku[indexBukuUbah].isComplete = dibaca;
+      // Periksa apakah buku ditemukan
+      if (indexBukuUbah !== -1) {
+        // Ubah isComplete buku pada indeks yang ditentukan
+        dataBuku[indexBukuUbah].isComplete = dibaca;
 
-    // Simpan kembali array dataBuku yang telah diperbarui ke localStorage
-    localStorage.setItem("buku", JSON.stringify(dataBuku));
+        // Simpan kembali array dataBuku yang telah diperbarui ke localStorage
+        localStorage.setItem("buku", JSON.stringify(dataBuku));
 
-    // Perbarui tampilan data pada Rak Buku
-    tampilkanBuku();
-    // console.log("Buku telah diubah dari localStorage");
-  } else {
-    console.log("Buku tidak ditemukan dalam localStorage");
-  }
+        // Perbarui tampilan data pada Rak Buku
+        tampilkanBuku();
+        // console.log("Buku telah diubah dari localStorage");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Buku berhasil dipindah",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        console.log("Buku tidak ditemukan dalam localStorage");
+      }
+    }
+  });
 }
 
 // Pencarian Buku
@@ -265,7 +313,7 @@ function cariBuku(event) {
   document.getElementById("rak").scrollIntoView();
 }
 
-// Tambahan Ketika Checkbox Dipencet
+// Tambahan Ketika Checkbox Dipencet pada Form Tambah Buku
 function updateCheckbox(elemen) {
   // ambil elemen tombol submit
   let spanSubmit = document.getElementById("spanSubmit");
@@ -318,11 +366,11 @@ function editBuku(event) {
 
   // ambil id bukunya dulu
   let idBuku = elemenForm.querySelector("#idBukuModal").value;
-  idBuku = Number(idBuku) // ubah tipe data ke dalam number/integer dulu
-  
+  idBuku = Number(idBuku); // ubah tipe data ke dalam number/integer dulu
+
   // Temukan indeks buku yang akan diubah dalam array dataBuku
   let indexBukuUbah = dataBuku.findIndex((buku) => buku.id === idBuku);
-  
+
   // Periksa apakah buku ditemukan
   if (indexBukuUbah !== -1) {
     // nilai-nilai input
@@ -343,6 +391,13 @@ function editBuku(event) {
     // Perbarui tampilan data pada Rak Buku
     tampilkanBuku();
     // console.log("Buku telah diubah dari localStorage");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Buku berhasil diubah",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   } else {
     console.log("Buku tidak ditemukan dalam localStorage");
   }
