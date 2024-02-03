@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Pengelolaan Data</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="text-white">
+      <div
+        id="sliderBackground"
+        class="jumbotron jumbotron-fluid bg-first py-5"
+      >
+        <div class="bg-hitam"></div>
+        <div class="container">
+          <h1 class="display-4 fw-bold">Aplikasi Pengelolaan Data</h1>
+          <p class="lead fw-bold">
+            Selamat datang di website yang dapat memasukan data buku ke dalam
+            rak, memindahkan data buku antar rak, dan menghapus data buku dari
+            rak.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="text-white">
+      <div class="d-flex justify-content-between px-5 pt-5">
+        <div
+          class="w-100 mr-1 border-custom bg-first"
+          style="height: fit-content"
+        >
+          <h2 class="text-center">Masukkan Buku Baru</h2>
+          <form onsubmit="tambahBuku(event)">
+            <div class="mb-3">
+              <label for="judul" class="form-label">Judul</label>
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="judul"
+                name="judul"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="penulis" class="form-label">Penulis</label>
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="penulis"
+                name="penulis"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="tahun" class="form-label">Tahun</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="tahun"
+                name="tahun"
+              />
+            </div>
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="dibaca"
+                name="dibaca"
+                onchange="updateCheckbox(this)"
+              />
+              <label class="form-check-label" for="dibaca"
+                >Selesai Dibaca</label
+              >
+            </div>
+            <button type="submit" class="btn btn-primary border-white-custom">
+              Masukkan Buku ke Rak
+              <span id="spanSubmit" style="color: whitesmoke; font-weight: bold"
+                >Belum Selesai Dibaca</span
+              >
+            </button>
+          </form>
+        </div>
+
+        <div class="w-100 ml-1">
+          <div class="search border-custom bg-first">
+            <h2 class="text-center">Cari Buku</h2>
+            <form onsubmit="cariBuku(event)">
+              <div class="d-flex justify-content-between">
+                <label for="judul" class="mx-2 form-label">Judul</label>
+                <input
+                  type="text"
+                  class="mx-2 form-control"
+                  id="judul"
+                  name="judul"
+                />
+                <button
+                  type="submit"
+                  class="mx-2 btn btn-primary border-white-custom"
+                >
+                  Cari
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between px-5 pt-3 pb-5" id="rak">
+        <div id="rakBelumDibaca" class="w-100 mt-3 border-custom bg-first mr-1">
+          <h2 class="text-center">Belum Selesai Dibaca</h2>
+          <div id="templateBelumDibaca"></div>
+        </div>
+
+        <div id="rakSudahDibaca" class="w-100 mt-3 border-custom bg-first ml-1">
+          <h2 class="text-center">Selesai Dibaca</h2>
+          <div id="templateSudahDibaca"></div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade text-primary"
+        id="editBukuModal"
+        tabindex="-1"
+        aria-labelledby="editBukuModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form onsubmit="editBuku(event)">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editBukuModalLabel">Edit Buku</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="idBukuModal"
+                    name="idBukuModal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="judulModal" class="form-label">Judul</label>
+                  <input
+                    required
+                    type="text"
+                    class="form-control"
+                    id="judulModal"
+                    name="judulModal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="penulisModal" class="form-label">Penulis</label>
+                  <input
+                    required
+                    type="text"
+                    class="form-control"
+                    id="penulisModal"
+                    name="penulisModal"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="tahunModal" class="form-label">Tahun</label>
+                  <input
+                    required
+                    type="number"
+                    class="form-control"
+                    id="tahunModal"
+                    name="tahunModal"
+                  />
+                </div>
+                <div class="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="dibacaModal"
+                    name="dibacaModal"
+                  />
+                  <label class="form-check-label" for="dibacaModal"
+                    >Selesai Dibaca</label
+                  >
+                </div>
+              </div>
+              <div class="modal-footer d-flex justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Edit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer bg-first">
+        <p>@Copyright By Rizki Ardian Samudra</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript file link -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

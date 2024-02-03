@@ -1,0 +1,72 @@
+input {
+  outline: 1px solid #007bff;
+}
+
+.border-custom {
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.border-white-custom {
+  border: 2px solid #ffffff;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+
+.p-10px {
+  padding: 10px;
+}
+
+.bg-first {
+  background-color: #007bff;
+}
+
+.bg-second {
+  background-color: #00b8ff;
+}
+
+.bg-third {
+  background-color: #00d6ff;
+}
+
+.jumbotron{
+  background-image: url(images/bg1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+}
+
+.jumbotron .bg-hitam{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.jumbotron .container{
+  position: relative;
+}
+
+
+.footer {
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer p {
+  font-size: 1.5rem;
+  color: white;
+}
