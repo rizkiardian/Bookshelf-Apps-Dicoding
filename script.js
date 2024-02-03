@@ -9,6 +9,26 @@ setInterval(function changeImage() {
     "url(images/" + background[indexBackground] + ")";
 }, 5000);
 
+// Buku Elemen Template
+function bukuElemenTemplate(buku, kalimatTombol, booleanTombol) {
+  return `
+      <div class="border-custom border-info bg-second mb-3">
+        <div class="d-flex justify-content-between">
+          <h3 class="judul">${buku.judul}</h3>
+          <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
+        </div>
+        <p class="penulis">Penulis: ${buku.penulis}</p>
+        <p class="tahun">Tahun: ${buku.tahun}</p>
+        <div class="d-flex justify-content-between flex-md-column flex-lg-row">
+          <button class="btn btn-success" onclick="pindahBuku(${buku.id}, ${booleanTombol})">
+            ${kalimatTombol}
+          </button>
+          <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
+        </div>
+      </div>
+  `;
+}
+
 // Menampilkan data pada Rak Buku
 function tampilkanBuku() {
   // ambil data buku dari local storage
@@ -29,42 +49,12 @@ function tampilkanBuku() {
       // Apakah bukunya sudah dibaca
       if (buku.isComplete) {
         // buat elemen untuk bukunya (judul, penulis, tahun)
-        let bukuElemen = `
-          <div class="border-custom border-info bg-second mb-3">
-            <div class="d-flex justify-content-between">
-              <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
-            </div>
-            <p class="penulis">Penulis: ${buku.penulis}</p>
-            <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
-              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, false)">
-                Belum Selesai Dibaca
-              </button>
-              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
-            </div>
-          </div>
-        `;
+        let bukuElemen = bukuElemenTemplate(buku, "Belum Selesai Dibaca", false);
         // tambahkan elemen buku ke dalam variabel daftar buku
         listBukuSudahDibaca = listBukuSudahDibaca + bukuElemen;
       } else {
         // buat elemen untuk bukunya (judul, penulis, tahun)
-        let bukuElemen = `
-          <div class="border-custom border-info bg-second mb-3">
-            <div class="d-flex justify-content-between">
-              <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
-            </div>
-            <p class="penulis">Penulis: ${buku.penulis}</p>
-            <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
-              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, true)">
-                Selesai Dibaca
-              </button>
-              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
-            </div>
-          </div>
-        `;
+        let bukuElemen = bukuElemenTemplate(buku, "Selesai Dibaca", true);
         // tambahkan elemen buku ke dalam variabel daftar buku
         listBukuBelumDibaca = listBukuBelumDibaca + bukuElemen;
       }
@@ -261,42 +251,12 @@ function cariBuku(event) {
         // Apakah bukunya sudah dibaca
         if (buku.isComplete) {
           // buat elemen untuk bukunya (judul, penulis, tahun)
-          let bukuElemen = `
-          <div class="border-custom border-info bg-second mb-3">
-            <div class="d-flex justify-content-between">
-              <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
-            </div>
-            <p class="penulis">Penulis: ${buku.penulis}</p>
-            <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
-              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, false)">
-                Belum Selesai Dibaca
-              </button>
-              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
-            </div>
-          </div>
-        `;
+          let bukuElemen = bukuElemenTemplate(buku, "Belum Selesai Dibaca", false);
           // tambahkan elemen buku ke dalam variabel daftar buku yang dicari
           listBukuSudahDibaca = listBukuSudahDibaca + bukuElemen;
         } else {
           // buat elemen untuk bukunya (judul, penulis, tahun)
-          let bukuElemen = `
-          <div class="border-custom border-info bg-second mb-3">
-            <div class="d-flex justify-content-between">
-              <h3 class="judul">${buku.judul}</h3>
-              <button class="btn btn-primary" onclick="editModal(${buku.id})" data-bs-toggle="modal" data-bs-target="#editBukuModal">Edit Buku</button>
-            </div>
-            <p class="penulis">Penulis: ${buku.penulis}</p>
-            <p class="tahun">Tahun: ${buku.tahun}</p>
-            <div class="d-flex justify-content-between flex-md-column flex-lg-row">
-              <button class="btn btn-success" onclick="pindahBuku(${buku.id}, true)">
-                Selesai Dibaca
-              </button>
-              <button class="btn btn-danger mt-md-3 mt-lg-0" onclick="hapusBuku(${buku.id})">Hapus Buku</button>
-            </div>
-          </div>
-        `;
+          let bukuElemen = bukuElemenTemplate(buku, "Selesai Dibaca", true);
           // tambahkan elemen buku ke dalam variabel daftar buku yang dicari
           listBukuBelumDibaca = listBukuBelumDibaca + bukuElemen;
         }
